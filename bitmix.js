@@ -214,7 +214,7 @@ function validateInput(value, row) {
 
 function inputEnd(target, row) {
   presets.custom[row] = validateInput(target.value, row);
-  setTimeout(() => reload(presets.custom));
+  reload(presets.custom);
 }
 
 function opWidthChange(value) {
@@ -259,23 +259,25 @@ function appendTextAndSpan(parent, className, text, spanText, row) {
 }
 
 function reload(config) {
-  tableEl.replaceChildren();
-  last = config[1];
-  addRow(last);
-  last = mul(last, config[2], 2, true);
-  last = and(last, config[3], 3);
-  last = mul(last, config[4], 4, false);
-  last = shr(last, config[5], 5);
-  last = and(last, config[6], 6);
+  setTimeout(() => {
+    tableEl.replaceChildren();
+    last = config[1];
+    addRow(last);
+    last = mul(last, config[2], 2, true);
+    last = and(last, config[3], 3);
+    last = mul(last, config[4], 4, false);
+    last = shr(last, config[5], 5);
+    last = and(last, config[6], 6);
 
-  formulaEl.replaceChildren();
-  appendTextAndSpan(formulaEl, 'bold', '((((',     config[1]);
-  appendTextAndSpan(formulaEl, 'edit', ' * ',      `0x${config[2]}`,  2);
-  appendTextAndSpan(formulaEl, 'edit', ') & ',     `0x${config[3]}`,  3);
-  appendTextAndSpan(formulaEl, 'edit', ') * ',     `0x${config[4]}`,  4);
-  appendTextAndSpan(formulaEl, 'edit', ') >> ',    config[5],         5);
-  appendTextAndSpan(formulaEl, 'edit', ') & ',     `$0x${config[6]}`, 6);
-  appendTextAndSpan(formulaEl, 'bold', ' \u279e ', stripLeadingZeroes(last));
+    formulaEl.replaceChildren();
+    appendTextAndSpan(formulaEl, 'bold', '((((',     config[1]);
+    appendTextAndSpan(formulaEl, 'edit', ' * ',      `0x${config[2]}`,  2);
+    appendTextAndSpan(formulaEl, 'edit', ') & ',     `0x${config[3]}`,  3);
+    appendTextAndSpan(formulaEl, 'edit', ') * ',     `0x${config[4]}`,  4);
+    appendTextAndSpan(formulaEl, 'edit', ') >> ',    config[5],         5);
+    appendTextAndSpan(formulaEl, 'edit', ') & ',     `$0x${config[6]}`, 6);
+    appendTextAndSpan(formulaEl, 'bold', ' \u279e ', stripLeadingZeroes(last));
+  });
 }
 
 loadPreset(currentPreset);
