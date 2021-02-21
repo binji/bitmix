@@ -1,0 +1,64 @@
+<!--
+ * Copyright (C) 2021 Ben Smith
+ *
+ * This software may be modified and distributed under the terms
+ * of the MIT license.  See the LICENSE file for details.
+-->
+<!DOCTYPE html>
+<head>
+  <style>
+    body {
+      background-color: #fff;
+      font: 12px monospace;
+    }
+    table { border-spacing: 0; padding: 0; }
+    .ui { padding-bottom: 8px; }
+    .line { border-bottom: 2px solid #000; }
+    .bold { font-weight: bold; }
+    .zero { color: #666; }
+    .hide-zero .zero { color: RGBA(0,0,0,0); }
+    .four { padding-right: 4px; }
+    .eight { padding-right: 8px; }
+    .edit { background-color: lightblue; }
+    .edit:hover { color: #666; background-color: yellow; cursor: pointer; }
+    .vgap { padding-bottom: 8px; }
+  </style>
+</head>
+<body>
+  <h2>BitMix</h2>
+  <p>Mix the bits of a 4-/8-/16-bit value via only multiply/and/shift
+    operations, as demonstrated in <a href="https://graphics.stanford.edu/~seander/bithacks.html">Sean Anderson's Bit Twiddling Hacks</a>. Click the <span class="edit">blue</span> text to flip bits and edit inputs.</p>
+  <hr>
+  <div class="ui">
+    <label for="preset">example:</label>
+    <select id="preset">
+      <option value="reverse" selected>reverse byte</option>
+      <option value="inter">interleave bits</option>
+      <option value="rinter">reverse interleave bits</option>
+      <option value="dub4">double-up nybble</option>
+      <option value="reverse4">reverse nybble</option>
+      <option value="cabbage">abcdefgh &#10142; cabbage</option>
+      <option value="custom">custom</option>
+    </select>
+    <label for="inwidth">input width:</label>
+    <select id="inwidth">
+      <option value="abcd">4-bit</option>
+      <option value="abcdefgh" selected>8-bit</option>
+      <option value="abcdefghijklmnop">16-bit</option>
+    </select>
+    <label for="opwidth">op width:</label>
+    <select id="opwidth">
+      <option value="16">16-bit</option>
+      <option value="32">32-bit</option>
+      <option value="64" selected>64-bit</option>
+    </select>
+    <label for="zero">display zeroes</label><input id="zero" type="checkbox" checked>
+  </div>
+  <table class="vgap"></table>
+  <div id="formula" class="vgap"></div>
+  <hr>
+  <p>BitMix by <a href="https://github.com/binji">@binji</a>,
+  technique and "reverse byte" by <a href="https://graphics.stanford.edu/~seander/bithacks.html#ReverseByteWith64Bits">Sean Anderson</a>,
+  "interleave bits" by <a href="https://graphics.stanford.edu/~seander/bithacks.html#Interleave64bitOps">Holger Bettag</a></p>
+  <script src="mul.js"></script>
+</body>
