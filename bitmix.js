@@ -260,7 +260,7 @@ function appendTextAndSpan(parent, className, text, spanText, row) {
 
 function reload(config) {
   setTimeout(() => {
-    tableEl.replaceChildren();
+    tableEl.innerHTML = '';
     last = config[1];
     addRow(last);
     last = mul(last, config[2], 2, true);
@@ -269,7 +269,7 @@ function reload(config) {
     last = shr(last, config[5], 5);
     last = and(last, config[6], 6);
 
-    formulaEl.replaceChildren();
+    formulaEl.innerHTML = '';
     appendTextAndSpan(formulaEl, 'bold', '((((',     config[1]);
     appendTextAndSpan(formulaEl, 'edit', ' * ',      `0x${config[2]}`,  2);
     appendTextAndSpan(formulaEl, 'edit', ') & ',     `0x${config[3]}`,  3);
